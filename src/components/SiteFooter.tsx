@@ -20,7 +20,7 @@ export function SiteFooter({ whatsappPhoneDigits = "" }: { whatsappPhoneDigits?:
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-700/10 ring-1 ring-amber-500/30">
                 <span className="text-base font-black text-amber-400">✂</span>
               </span>
-              <span className="text-lg font-bold text-white">صالون الحلاقة</span>
+              <span className="text-lg font-bold text-white">Royal Barbers</span>
             </div>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-500">
               حجز أونلاين بسهولة — مواعيد واضحة، فريق محترف، وتجربة راقية من أول زيارة.

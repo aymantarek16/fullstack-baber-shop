@@ -44,8 +44,8 @@ export function SiteHeader() {
             <span className="text-sm font-black text-amber-400">✂</span>
           </span>
           <span className="text-base font-bold tracking-tight sm:text-lg">
-            <span className="bg-gradient-to-l from-amber-200 to-amber-500 bg-clip-text text-transparent">صالون</span>
-            <span className="text-zinc-100"> الحلاقة</span>
+            <span className="bg-gradient-to-l from-amber-200 to-amber-500 bg-clip-text text-transparent">Royal</span>
+            <span className="text-zinc-100"> Barbers</span>
           </span>
         </Link>
 

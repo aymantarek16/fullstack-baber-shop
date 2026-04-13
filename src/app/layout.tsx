@@ -9,8 +9,11 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "صالون الحلاقة — احجز موعدك",
+  title: "Royal Barbers — احجز موعدك",
   description: "احجز موعدك أونلاين بسهولة. قص، ذقن، وباكيدج بأفضل الحلاقين.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
