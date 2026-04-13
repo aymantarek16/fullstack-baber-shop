@@ -1,90 +1,164 @@
-# صالون الحلاقة — نظام حجز كامل
+# 💈 Barbershop Booking System
 
-موقع عربي (RTL) لحجز مواعيد الحلاقة مع لوحة تحكم للإدارة، قاعدة بيانات [Supabase](https://supabase.com/)، وجاهز للنشر على [Vercel](https://vercel.com/).
-
-## المتطلبات
-
-- Node.js 20+
-- حساب Supabase (الطبقة المجانية كافية)
-
-## أ) إنشاء مشروع Supabase
-
-1. ادخل إلى [https://supabase.com/dashboard](https://supabase.com/dashboard) وأنشئ مشروعًا جديدًا.
-2. انتظر حتى يكتمل تهيئة قاعدة البيانات.
-3. من **Project Settings → API** انسخ:
-   - **Project URL** → يُستخدم كـ `NEXT_PUBLIC_SUPABASE_URL`
-   - **anon public** → يُستخدم كـ `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-
-## ب) لصق المفاتيح محليًا
-
-1. انسخ الملف `.env.example` إلى `.env.local`.
-2. الصق القيم الحقيقية من لوحة Supabase.
-3. أضف رقم واتساب النشاط بصيغة مصرية مع كود الدولة **بدون علامة +**، مثال: `201234567890` → `NEXT_PUBLIC_WHATSAPP_BUSINESS_PHONE=201234567890`.
-
-## ج) تشغيل SQL (الجداول + الحماية)
-
-1. في Supabase: **SQL Editor → New query**.
-2. افتح من المشروع الملف `supabase/schema.sql`، انسخه كاملًا والصقه في المحرر، ثم **Run**.
-3. افتح `supabase/seed.sql`، انسخه والصقه، ثم **Run** (يضيف 3 حلاقين و3 خدمات).
-
-**بديل (اختياري):** بعد إضافة `SUPABASE_SERVICE_ROLE_KEY` إلى `.env.local` (من إعدادات المشروع → API، ولا تشاركه ولا تنشره)، يمكنك تشغيل:
-
-```bash
-npm run seed
-```
-
-## د) إنشاء حساب مشرف وربطه باللوحة
-
-1. في Supabase: **Authentication → Users → Add user → Create new user** (بريد وكلمة مرور).
-   - للتجربة السريعة يمكن تعطيل **Confirm email** من **Authentication → Providers → Email** (يفضّل إعادة تفعيله في الإنتاج).
-2. انسخ **User UID** للمستخدم الذي أنشأته.
-3. في **SQL Editor** نفّذ (استبدل `PASTE_USER_UUID_HERE`):
-
-```sql
-INSERT INTO public.admin_users (user_id) VALUES ('PASTE_USER_UUID_HERE');
-```
-
-بعدها يمكنك تسجيل الدخول من `/admin/login` بنفس البريد وكلمة المرور.
-
-## هـ) تشغيل المشروع محليًا
-
-```bash
-npm install
-npm run dev
-```
-
-- الموقع العام: [http://localhost:3000](http://localhost:3000)
-- لوحة التحكم: [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
-
-## و) النشر على Vercel
-
-1. ارفع المشروع إلى GitHub (أو GitLab/Bitbucket).
-2. في [Vercel](https://vercel.com/) أنشئ مشروعًا جديدًا واربطه بالمستودع.
-3. في **Environment Variables** أضف نفس المتغيرات الموجودة في `.env.example` (القيم الفعلية).
-4. انشر — سيتم تشغيل `npm run build` تلقائيًا.
-
-## السلوك التقني المهم
-
-- **منع الحجز المزدوج**: فهرس فريد على `(barber_id, booking_date, booking_time)` للصفوف غير الملغاة، مع التحقق في الواجهة عبر الدالة `get_booked_slots`.
-- **لا بيانات وهمية في المنطق**: الصفحة الرئيسية ونموذج الحجز يقرآن من Supabase فقط؛ الرسائل التوضيحية تظهر فقط عند نقص الإعداد أو البيانات.
-- **واتساب**: بعد حجز ناجح يُفتح رابط `https://wa.me/20...?text=...` برسالة منسقة.
-
-## هيكل الملفات المرتبط بالباكند
-
-| الملف | الوصف |
-|--------|--------|
-| `supabase/schema.sql` | الجداول، الـ RLS، الدوال، منع التعارض |
-| `supabase/seed.sql` | بيانات أولية للحلاقين والخدمات |
-
-## الأوامر
-
-| الأمر | الوظيفة |
-|--------|----------|
-| `npm run dev` | التطوير |
-| `npm run build` | بناء الإنتاج |
-| `npm run start` | تشغيل بعد البناء |
-| `npm run lint` | فحص ESLint |
+A full-stack modern web application for managing barbershop bookings, built with a clean user experience and a powerful admin dashboard.
 
 ---
 
-صُمم لصالونات حقيقية: واجهة عربية، حجز مع تحقق من المواعيد، ولوحة إدارة للحالات والفلترة.
+## 🚀 Overview
+
+This project is a real-world booking system for a barbershop that allows customers to easily reserve appointments without friction, while providing the business owner with full control over bookings through an admin panel.
+
+The goal is to deliver:
+
+* A fast and smooth user experience
+* A modern premium UI
+* A practical system that can be used in production
+
+---
+
+## ✨ Features
+
+### 👤 Customer Side
+
+* Book an appointment without creating an account
+* Simple and intuitive booking flow
+* Select date and time easily
+* Instant booking submission
+* Mobile-first responsive design
+
+---
+
+### 🛠 Admin Dashboard
+
+* View all bookings in a structured table
+* Booking status management:
+
+  * Pending
+  * Confirmed
+  * Completed
+  * Cancelled
+* Delete bookings
+* Organized UI for quick actions
+* Optimized for real-world daily usage
+
+---
+
+## 🧩 Tech Stack
+
+### Frontend
+
+* Next.js (App Router)
+* TypeScript
+* Tailwind CSS
+* Modern component-based architecture
+
+### Backend
+
+* Supabase (Database + Auth + APIs)
+* PostgreSQL
+
+### Deployment
+
+* Vercel (Frontend hosting)
+
+---
+
+## 🏗 Architecture
+
+The project follows a clean and scalable structure:
+
+* **App Router (Next.js)** for routing and server rendering
+* **Server Components** for fast data fetching
+* **Client Components** for interactivity
+* **Supabase** for backend services
+* Separation between UI, logic, and data
+
+---
+
+## 🔐 Authentication
+
+* Admin access is protected
+* Uses Supabase authentication
+* Only authorized users can access the dashboard
+
+---
+
+## ⚡ Performance
+
+* Server-side rendering (SSR)
+* Optimized data fetching
+* Lightweight UI
+* Fast load times
+
+---
+
+## 🎨 UI & UX
+
+* Modern, clean, and premium design
+* Smooth transitions and interactions
+* Responsive across all devices
+* Focus on usability and clarity
+
+---
+
+## 🌍 Use Case
+
+This project can be used for:
+
+* Barbershops
+* Salons
+* Small service businesses
+* Appointment-based services
+
+---
+
+## 🧪 Future Improvements
+
+* Online payments integration
+* Notifications (WhatsApp / Email)
+* Multi-branch support
+* Staff management
+* Time slot availability system
+
+---
+
+## 📦 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <https://github.com/aymantarek16/fullstack-baber-shop>
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup environment variables
+
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+```
+
+### 4. Run the project
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧑‍💻 Author
+
+Built with focus on performance, scalability, and real-world usability.
+
+---
+
+## ⭐ Notes
+
+This is not just a demo — it is structured to be production-ready and easily extendable for real clients.
