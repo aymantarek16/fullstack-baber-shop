@@ -190,3 +190,20 @@ export async function deleteBooking(bookingId: string) {
   revalidatePath("/admin");
   return { ok: true as const };
 }
+
+export async function deleteAllBookings() {
+  const supabase = await requireAdminSession();
+
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .not("id", "is", null);
+
+  if (error) {
+    console.error("deleteAllBookings error:", error);
+    return { ok: false as const, error: "تعذر حذف كل الحجوزات" };
+  }
+
+  revalidatePath("/admin");
+  redirect("/admin");
+}

@@ -7,6 +7,10 @@ interface ConfirmDeleteModalProps {
   onClose: () => void;
   onConfirm: () => void;
   isDeleting: boolean;
+  title?: string;
+  description?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
 }
 
 export function ConfirmDeleteModal({
@@ -14,6 +18,10 @@ export function ConfirmDeleteModal({
   onClose,
   onConfirm,
   isDeleting,
+  title = "تأكيد حذف الحجز",
+  description = "هل أنت متأكد أنك تريد حذف هذا الحجز نهائيًا؟ لا يمكن التراجع بعد الحذف.",
+  confirmLabel = "تأكيد الحذف",
+  cancelLabel = "إلغاء",
 }: ConfirmDeleteModalProps) {
   const [shouldRender, setShouldRender] = useState(isOpen);
   const [isVisible, setIsVisible] = useState(false);
@@ -76,14 +84,14 @@ export function ConfirmDeleteModal({
 
       {/* Modal */}
       <div
-        className={`relative w-full max-w-md rounded-3xl border border-white/[0.12] bg-gradient-to-br from-zinc-900 via-zinc-950 to-black shadow-2xl shadow-black/50 ring-1 ring-white/[0.08] transition-all duration-300 ease-out will-change-transform ${
+        className={`relative w-full max-w-md rounded-3xl border border-white/12 bg-linear-to-br from-zinc-900 via-zinc-950 to-black shadow-2xl shadow-black/50 ring-1 ring-white/8 transition-all duration-300 ease-out will-change-transform ${
           isVisible
             ? "translate-y-0 scale-100 opacity-100"
             : "translate-y-6 scale-95 opacity-0"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 border-b border-white/[0.08] px-6 py-5">
+        <div className="flex items-center gap-3 border-b border-white/8 px-6 py-5">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-red-500/20 text-red-400">
             <svg
               className="h-5 w-5"
@@ -103,7 +111,7 @@ export function ConfirmDeleteModal({
 
           <div>
             <h2 id="confirm-delete-title" className="text-lg font-bold text-white">
-              تأكيد حذف الحجز
+              {title}
             </h2>
             <p className="text-sm text-zinc-400">إجراء خطير</p>
           </div>
@@ -115,17 +123,17 @@ export function ConfirmDeleteModal({
             id="confirm-delete-description"
             className="text-right text-sm font-medium leading-6 text-zinc-300"
           >
-            هل أنت متأكد أنك تريد حذف هذا الحجز نهائيًا؟ لا يمكن التراجع بعد الحذف.
+            {description}
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col gap-3 border-t border-white/[0.08] px-6 py-5 sm:flex-row-reverse">
+        <div className="flex flex-col gap-3 border-t border-white/8 px-6 py-5 sm:flex-row-reverse">
           <button
             type="button"
             onClick={onConfirm}
             disabled={isDeleting}
-            className="flex h-11 flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-500 to-red-600 px-4 text-sm font-bold text-white shadow-lg shadow-red-900/25 transition-all duration-200 hover:from-red-600 hover:to-red-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:flex-none sm:px-6"
+            className="flex h-11 flex-1 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-red-500 to-red-600 px-4 text-sm font-bold text-white shadow-lg shadow-red-900/25 transition-all duration-200 hover:from-red-600 hover:to-red-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:flex-none sm:px-6"
           >
             {isDeleting ? (
               <>
@@ -133,7 +141,7 @@ export function ConfirmDeleteModal({
                 جاري الحذف...
               </>
             ) : (
-              "تأكيد الحذف"
+              confirmLabel
             )}
           </button>
 
@@ -141,9 +149,9 @@ export function ConfirmDeleteModal({
             type="button"
             onClick={onClose}
             disabled={isDeleting}
-            className="flex h-11 flex-1 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.04] px-4 text-sm font-semibold text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none sm:px-6"
+            className="flex h-11 flex-1 items-center justify-center rounded-2xl border border-white/15 bg-white/4 px-4 text-sm font-semibold text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-all duration-200 hover:border-white/25 hover:bg-white/8 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none sm:px-6"
           >
-            إلغاء
+            {cancelLabel}
           </button>
         </div>
       </div>

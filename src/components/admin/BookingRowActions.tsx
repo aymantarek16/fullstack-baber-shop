@@ -16,10 +16,10 @@ const labels: Record<BookingStatus, string> = {
 };
 
 const selectClass =
-  "h-11 w-[170px] rounded-2xl border border-white/10 bg-zinc-950/90 px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] outline-none transition focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/15 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 w-full appearance-none rounded-xl border border-white/10 bg-zinc-950/90 pr-4 pl-8 text-right text-sm font-semibold text-white outline-none transition focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/15 disabled:cursor-not-allowed disabled:opacity-50";
 
 const deleteBtnClass =
-  "h-11 w-[170px] rounded-2xl border border-red-500/30 bg-red-500/10 px-4 text-sm font-bold text-red-300 transition hover:bg-red-500/15 hover:border-red-500/45 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 w-[105px] shrink-0 rounded-xl border border-red-500/30 bg-red-500/10 px-3 text-sm font-bold text-red-300 transition hover:bg-red-500/15 hover:border-red-500/45 disabled:cursor-not-allowed disabled:opacity-50 max-md:w-[96px]";
 
 export function BookingRowActions({
   bookingId,
@@ -53,7 +53,7 @@ export function BookingRowActions({
     router.refresh();
   }
 
-  async function onDelete() {
+  function onDelete() {
     setIsDeleteModalOpen(true);
   }
 
@@ -75,34 +75,41 @@ export function BookingRowActions({
   }
 
   return (
-    <div className="flex min-w-[170px] flex-col items-end justify-center gap-3 py-1">
-      <div className="relative w-[170px]">
-        <select
-          disabled={pending}
-          value={status}
-          onChange={(e) => void onStatusChange(e.target.value as BookingStatus)}
-          className={selectClass}
-          aria-label="تغيير حالة الحجز"
+    <>
+      <div className="flex min-w-52.5 items-center justify-end gap-2 py-1 max-md:min-w-45">
+        <div className="relative w-28.75 shrink-0 max-md:w-25">
+          <select
+            dir="rtl"
+            disabled={pending}
+            value={status}
+            onChange={(e) => void onStatusChange(e.target.value as BookingStatus)}
+            className={selectClass}
+            aria-label="تغيير حالة الحجز"
+          >
+            {STATUSES.map((s) => (
+              <option key={s} value={s}>
+                {labels[s]}
+              </option>
+            ))}
+          </select>
+
+          <span className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-[10px] text-white/60">
+            ▼
+          </span>
+        </div>
+
+        <button
+          type="button"
+          disabled={pending || isDeleting}
+          onClick={onDelete}
+          className={deleteBtnClass}
         >
-          {STATUSES.map((s) => (
-            <option key={s} value={s}>
-              {labels[s]}
-            </option>
-          ))}
-        </select>
+          {isDeleting ? "جاري..." : "حذف"}
+        </button>
       </div>
 
-      <button
-        type="button"
-        disabled={pending || isDeleting}
-        onClick={() => void onDelete()}
-        className={deleteBtnClass}
-      >
-        {isDeleting ? "جاري الحذف..." : "حذف الحجز"}
-      </button>
-
       {msg ? (
-        <span className="max-w-[170px] text-right text-[11px] leading-5 text-red-400">
+        <span className="mt-1 block max-w-52.5 text-right text-[11px] leading-5 text-red-400 max-md:max-w-45">
           {msg}
         </span>
       ) : null}
@@ -113,6 +120,6 @@ export function BookingRowActions({
         onConfirm={confirmDelete}
         isDeleting={isDeleting}
       />
-    </div>
+    </>
   );
 }
