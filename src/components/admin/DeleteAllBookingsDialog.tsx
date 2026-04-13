@@ -1,16 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 
 interface DeleteAllBookingsDialogProps {
-  action: (formData?: FormData) => Promise<unknown>;
+  formId: string;
 }
 
-export function DeleteAllBookingsDialog({ action }: DeleteAllBookingsDialogProps) {
+export function DeleteAllBookingsDialog({ formId }: DeleteAllBookingsDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   function openModal() {
     setIsOpen(true);
@@ -24,7 +23,9 @@ export function DeleteAllBookingsDialog({ action }: DeleteAllBookingsDialogProps
   function confirmDelete() {
     if (isDeleting) return;
     setIsDeleting(true);
-    formRef.current?.requestSubmit();
+
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    form?.requestSubmit();
   }
 
   return (
@@ -49,7 +50,6 @@ export function DeleteAllBookingsDialog({ action }: DeleteAllBookingsDialogProps
         cancelLabel="إلغاء"
       />
 
-      <form ref={formRef} action={action} className="hidden" />
     </>
   );
 }

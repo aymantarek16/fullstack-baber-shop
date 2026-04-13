@@ -159,11 +159,10 @@ function Pagination({
         <Link
           href={buildAdminPageHref(params, currentPage - 1)}
           aria-disabled={currentPage <= 1}
-          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${
-            currentPage <= 1
+          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage <= 1
               ? "pointer-events-none border-white/10 bg-white/[0.025] text-zinc-600"
               : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
-          }`}
+            }`}
         >
           السابق
         </Link>
@@ -181,11 +180,10 @@ function Pagination({
               <Link
                 href={buildAdminPageHref(params, page)}
                 aria-current={page === currentPage ? "page" : undefined}
-                className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-3 text-sm font-extrabold transition ${
-                  page === currentPage
+                className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-3 text-sm font-extrabold transition ${page === currentPage
                     ? "border-amber-400/40 bg-gradient-to-r from-amber-300 to-amber-500 text-zinc-950 shadow-[0_12px_30px_-12px_rgba(245,158,11,0.7)]"
                     : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
-                }`}
+                  }`}
               >
                 {page}
               </Link>
@@ -196,11 +194,10 @@ function Pagination({
         <Link
           href={buildAdminPageHref(params, currentPage + 1)}
           aria-disabled={currentPage >= totalPages}
-          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${
-            currentPage >= totalPages
+          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage >= totalPages
               ? "pointer-events-none border-white/10 bg-white/[0.025] text-zinc-600"
               : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
-          }`}
+            }`}
         >
           التالي
         </Link>
@@ -433,14 +430,17 @@ export default async function AdminDashboardPage({
                 >
                   إعادة ضبط
                 </Link>
+
+                {rows.length > 0 ? (
+                  <DeleteAllBookingsDialog formId="delete-all-bookings-form" />
+                ) : null}
               </div>
             </form>
-
-            {rows.length > 0 ? (
-              <div className="self-start">
-                <DeleteAllBookingsDialog action={deleteAllBookings} />
-              </div>
-            ) : null}
+            <form
+              id="delete-all-bookings-form"
+              action={deleteAllBookings}
+              className="hidden"
+            />
           </div>
 
           {!bookingsError && rows.length > 0 ? (
@@ -496,13 +496,12 @@ export default async function AdminDashboardPage({
                         {headers.map((header) => (
                           <th
                             key={header}
-                            className={`${thClass} ${
-                              header === "ملاحظات"
+                            className={`${thClass} ${header === "ملاحظات"
                                 ? "max-w-[160px]"
                                 : header === "إجراءات"
-                                ? "min-w-[220px]"
-                                : ""
-                            }`}
+                                  ? "min-w-[220px]"
+                                  : ""
+                              }`}
                           >
                             {header}
                           </th>
@@ -588,7 +587,7 @@ export default async function AdminDashboardPage({
           )}
 
           <p className="mt-8 text-center text-[11px] text-zinc-600">
-            لتحديث القائمة بعد تعديل من تبويب آخر، استخدم تحديث الصفحة.
+            لو عدّلت من تبويب تاني، اعمل ريفريش عشان التحديث يظهر
           </p>
         </Container>
       </main>
