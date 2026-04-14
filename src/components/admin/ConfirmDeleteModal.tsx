@@ -121,7 +121,7 @@ export function ConfirmDeleteModal({
           >
             {description}
           </p>
-        </div>
+        </div> 
 
         {/* Actions */}
         <div className="flex flex-col gap-3 border-t border-white/8 px-6 py-5 sm:flex-row-reverse">
