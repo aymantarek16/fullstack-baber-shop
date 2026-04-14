@@ -74,10 +74,10 @@ function StatCard({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl border p-5 shadow-[0_20px_60px_-25px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.03] backdrop-blur-sm ${accents[accent]}`}
+      className={`relative overflow-hidden rounded-3xl border p-5 shadow-[0_20px_60px_-25px_rgba(0,0,0,0.8)] ring-1 ring-white/3 backdrop-blur-sm ${accents[accent]}`}
     >
-      <div className="pointer-events-none absolute -left-10 top-0 h-24 w-24 rounded-full bg-white/[0.03] blur-2xl" />
-      <div className="pointer-events-none absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-white/[0.025] blur-2xl" />
+      <div className="pointer-events-none absolute -left-10 top-0 h-24 w-24 rounded-full bg-white/3 blur-2xl" />
+      <div className="pointer-events-none absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-white/2.5 blur-2xl" />
 
       <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-zinc-500">
         {label}
@@ -149,7 +149,7 @@ function Pagination({
   const pages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.02] px-4 py-4 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/[0.04] backdrop-blur-sm sm:flex-row">
+    <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-white/8 bg-linear-to-b from-white/4 to-white/2 px-4 py-4 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/4 backdrop-blur-sm sm:flex-row">
       <div className="text-sm text-zinc-400">
         صفحة <span className="font-extrabold text-white">{currentPage}</span> من{" "}
         <span className="font-extrabold text-white">{totalPages}</span>
@@ -159,9 +159,9 @@ function Pagination({
         <Link
           href={buildAdminPageHref(params, currentPage - 1)}
           aria-disabled={currentPage <= 1}
-          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage <= 1
-              ? "pointer-events-none border-white/10 bg-white/[0.025] text-zinc-600"
-              : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
+          className={`inline-flex min-h-10.5 min-w-10.5 items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage <= 1
+              ? "pointer-events-none border-white/10 bg-white/2.5 text-zinc-600"
+              : "border-white/10 bg-white/4.5 text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
             }`}
         >
           السابق
@@ -180,9 +180,9 @@ function Pagination({
               <Link
                 href={buildAdminPageHref(params, page)}
                 aria-current={page === currentPage ? "page" : undefined}
-                className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-3 text-sm font-extrabold transition ${page === currentPage
-                    ? "border-amber-400/40 bg-gradient-to-r from-amber-300 to-amber-500 text-zinc-950 shadow-[0_12px_30px_-12px_rgba(245,158,11,0.7)]"
-                    : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
+                className={`inline-flex min-h-10.5 min-w-10.5 items-center justify-center rounded-2xl border px-3 text-sm font-extrabold transition ${page === currentPage
+                    ? "border-amber-400/40 bg-linear-to-r from-amber-300 to-amber-500 text-zinc-950 shadow-[0_12px_30px_-12px_rgba(245,158,11,0.7)]"
+                    : "border-white/10 bg-white/4.5 text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
                   }`}
               >
                 {page}
@@ -194,9 +194,9 @@ function Pagination({
         <Link
           href={buildAdminPageHref(params, currentPage + 1)}
           aria-disabled={currentPage >= totalPages}
-          className={`inline-flex min-h-[42px] min-w-[42px] items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage >= totalPages
-              ? "pointer-events-none border-white/10 bg-white/[0.025] text-zinc-600"
-              : "border-white/10 bg-white/[0.045] text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
+          className={`inline-flex min-h-10.5 min-w-10.5 items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition ${currentPage >= totalPages
+              ? "pointer-events-none border-white/10 bg-white/2.5 text-zinc-600"
+              : "border-white/10 bg-white/4.5 text-zinc-300 hover:border-white/15 hover:bg-white/[0.07]"
             }`}
         >
           التالي
@@ -342,9 +342,9 @@ export default async function AdminDashboardPage({
           <div className="mt-8 flex flex-col gap-3">
             <form
               method="get"
-              className="flex flex-col gap-4 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.045] via-white/[0.025] to-white/[0.015] p-4 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.95)] ring-1 ring-white/[0.04] backdrop-blur-sm sm:flex-row sm:flex-wrap sm:items-end"
+              className="flex flex-col gap-4 rounded-3xl border border-white/8 bg-linear-to-b from-white/4.5 via-white/2.5 to-white/1.5 p-4 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.95)] ring-1 ring-white/4 backdrop-blur-sm sm:flex-row sm:flex-wrap sm:items-end"
             >
-              <label className="flex min-w-[160px] flex-1 flex-col gap-2">
+              <label className="flex min-w-40 flex-1 flex-col gap-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-zinc-500">
                   التاريخ
                 </span>
@@ -357,7 +357,7 @@ export default async function AdminDashboardPage({
                 />
               </label>
 
-              <label className="flex min-w-[180px] flex-1 flex-col gap-2">
+              <label className="flex min-w-45 flex-1 flex-col gap-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-zinc-500">
                   الحلاق
                 </span>
@@ -383,7 +383,7 @@ export default async function AdminDashboardPage({
                 </div>
               </label>
 
-              <label className="flex min-w-[160px] flex-1 flex-col gap-2">
+              <label className="flex min-w-40 flex-1 flex-col gap-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-zinc-500">
                   الحالة
                 </span>
@@ -419,14 +419,14 @@ export default async function AdminDashboardPage({
               <div className="flex w-full flex-col gap-2 sm:ms-auto sm:w-auto sm:flex-row sm:flex-wrap">
                 <button
                   type="submit"
-                  className="inline-flex min-h-[46px] items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 to-amber-500 px-6 text-sm font-black text-zinc-950 shadow-[0_14px_32px_-14px_rgba(245,158,11,0.75)] transition hover:scale-[0.99] hover:opacity-95"
+                  className="inline-flex min-h-11.5 items-center justify-center rounded-2xl bg-linear-to-r from-amber-300 to-amber-500 px-6 text-sm font-black text-zinc-950 shadow-[0_14px_32px_-14px_rgba(245,158,11,0.75)] transition hover:scale-[0.99] hover:opacity-95"
                 >
                   تطبيق
                 </button>
 
                 <Link
                   href="/admin"
-                  className="inline-flex min-h-[46px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.045] px-5 text-sm font-bold text-zinc-300 transition hover:border-white/15 hover:bg-white/[0.07]"
+                  className="inline-flex min-h-11.5 items-center justify-center rounded-2xl border border-white/10 bg-white/4.5 px-5 text-sm font-bold text-zinc-300 transition hover:border-white/15 hover:bg-white/[0.07]"
                 >
                   إعادة ضبط
                 </Link>
@@ -444,7 +444,7 @@ export default async function AdminDashboardPage({
           </div>
 
           {!bookingsError && rows.length > 0 ? (
-            <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-sm text-zinc-400 ring-1 ring-white/[0.03] sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-white/6 bg-white/2 px-4 py-3 text-sm text-zinc-400 ring-1 ring-white/3 sm:flex-row sm:items-center sm:justify-between">
               <p>
                 إجمالي النتائج:{" "}
                 <span className="font-extrabold text-white">{totalFilteredRows}</span>
@@ -468,7 +468,7 @@ export default async function AdminDashboardPage({
               </p>
             </div>
           ) : rows.length === 0 ? (
-            <div className="mt-10 rounded-3xl border border-dashed border-white/12 bg-white/[0.02] px-8 py-16 text-center ring-1 ring-white/[0.03]">
+            <div className="mt-10 rounded-3xl border border-dashed border-white/12 bg-white/2 px-8 py-16 text-center ring-1 ring-white/3">
               <p className="text-lg font-bold text-zinc-300">لا توجد حجوزات مطابقة</p>
               <p className="mt-2 text-sm text-zinc-600">
                 جرّب تغيير الفلاتر أو أعد ضبط البحث.
@@ -488,18 +488,18 @@ export default async function AdminDashboardPage({
                 ))}
               </div>
 
-              <div className="mt-8 hidden overflow-hidden rounded-[28px] border border-white/[0.08] bg-[#09090b]/95 shadow-[0_28px_80px_-35px_rgba(0,0,0,0.95)] ring-1 ring-white/[0.04] lg:block">
+              <div className="mt-8 hidden overflow-hidden rounded-[28px] border border-white/8 bg-[#09090b]/95 shadow-[0_28px_80px_-35px_rgba(0,0,0,0.95)] ring-1 ring-white/4 lg:block">
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[1120px] text-sm">
-                    <thead className="border-b border-white/[0.07] bg-white/[0.025]">
+                  <table className="w-full min-w-280 text-sm">
+                    <thead className="border-b border-white/[0.07] bg-white/2.5">
                       <tr className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-zinc-500">
                         {headers.map((header) => (
                           <th
                             key={header}
                             className={`${thClass} ${header === "ملاحظات"
-                                ? "max-w-[160px]"
+                                ? "max-w-40"
                                 : header === "إجراءات"
-                                  ? "min-w-[220px]"
+                                  ? "min-w-55"
                                   : ""
                               }`}
                           >
@@ -509,11 +509,11 @@ export default async function AdminDashboardPage({
                       </tr>
                     </thead>
 
-                    <tbody className="divide-y divide-white/[0.05]">
+                    <tbody className="divide-y divide-white/5">
                       {rows.map((b) => (
                         <tr
                           key={b.id}
-                          className="transition duration-200 hover:bg-white/[0.03]"
+                          className="transition duration-200 hover:bg-white/3"
                         >
                           <td className={`${tdClass} text-center font-bold text-white`}>
                             {b.customer_name}
@@ -547,7 +547,7 @@ export default async function AdminDashboardPage({
                           </td>
 
                           <td
-                            className={`${tdClass} max-w-[180px] truncate text-center text-xs text-zinc-500`}
+                            className={`${tdClass} max-w-45 truncate text-center text-xs text-zinc-500`}
                             title={b.notes ?? ""}
                           >
                             {b.notes?.trim() ? b.notes : "—"}
@@ -563,7 +563,7 @@ export default async function AdminDashboardPage({
                             </span>
                           </td>
 
-                          <td className={`${tdClass} min-w-[220px] text-center`}>
+                          <td className={`${tdClass} min-w-55 text-center`}>
                             <div className="flex justify-center">
                               <BookingRowActions
                                 bookingId={b.id}

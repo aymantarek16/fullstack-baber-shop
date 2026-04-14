@@ -191,7 +191,7 @@ export async function deleteBooking(bookingId: string) {
   return { ok: true as const };
 }
 
-export async function deleteAllBookings() {
+export async function deleteAllBookings(_formData: FormData) {
   const supabase = await requireAdminSession();
 
   const { error } = await supabase
@@ -201,7 +201,7 @@ export async function deleteAllBookings() {
 
   if (error) {
     console.error("deleteAllBookings error:", error);
-    return { ok: false as const, error: "تعذر حذف كل الحجوزات" };
+    return;
   }
 
   revalidatePath("/admin");

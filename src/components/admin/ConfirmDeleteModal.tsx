@@ -23,13 +23,11 @@ export function ConfirmDeleteModal({
   confirmLabel = "تأكيد الحذف",
   cancelLabel = "إلغاء",
 }: ConfirmDeleteModalProps) {
-  const [shouldRender, setShouldRender] = useState(isOpen);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(isOpen);
+  const shouldRender = isOpen || isVisible;
 
   useEffect(() => {
     if (isOpen) {
-      setShouldRender(true);
-
       const frame = requestAnimationFrame(() => {
         setIsVisible(true);
       });
@@ -37,10 +35,8 @@ export function ConfirmDeleteModal({
       return () => cancelAnimationFrame(frame);
     }
 
-    setIsVisible(false);
-
     const timeout = setTimeout(() => {
-      setShouldRender(false);
+      setIsVisible(false);
     }, 300);
 
     return () => clearTimeout(timeout);
