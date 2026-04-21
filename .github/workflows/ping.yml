@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping site
-        run: curl https://fullstack-baber-shop.vercel.app
+        run: curl https://fullstack-baber-shop.vercel.app/api/health
