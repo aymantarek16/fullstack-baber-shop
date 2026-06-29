@@ -2,9 +2,7 @@
 
 # Ayman Files 
 Private
-supabase
 fullstack-baber-shop.zip
-.env.local
 
 # dependencies
 /node_modules
@@ -37,7 +35,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# .env*
 
 # vercel
 .vercel
