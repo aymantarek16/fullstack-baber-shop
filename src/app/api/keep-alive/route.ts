@@ -2,13 +2,25 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
 export async function GET() {
-  const { data } = await supabaseAdmin
+  // 1. قراءة القيمة الحالية
+  const { data, error: fetchError } = await supabaseAdmin
     .from("system_heartbeat")
     .select("ping_count")
     .eq("id", 1)
     .single();
 
-  const { error } = await supabaseAdmin
+  if (fetchError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: fetchError.message,
+      },
+      { status: 500 }
+    );
+  }
+
+  // 2. تحديث القيمة
+  const { error: updateError } = await supabaseAdmin
     .from("system_heartbeat")
     .update({
       last_ping: new Date().toISOString(),
@@ -16,13 +28,17 @@ export async function GET() {
     })
     .eq("id", 1);
 
-  if (error) {
+  if (updateError) {
     return NextResponse.json(
-      { success: false, error: error.message },
+      {
+        success: false,
+        error: updateError.message,
+      },
       { status: 500 }
     );
   }
 
+  // 3. response
   return NextResponse.json({
     success: true,
     time: new Date().toISOString(),
