@@ -1,8 +1,13 @@
-const { data, error } = await supabaseAdmin
-  .from("system_heartbeat")
-  .select("*");
+import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase/server";
 
-return NextResponse.json({
-  data,
-  error,
-});
+export async function GET() {
+  const { data, error } = await supabaseAdmin
+    .from("system_heartbeat")
+    .select("*");
+
+  return NextResponse.json({
+    data,
+    error,
+  });
+}
